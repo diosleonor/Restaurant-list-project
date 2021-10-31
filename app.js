@@ -1,9 +1,23 @@
 // 定義所需變數
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
 const restaurants = require('./restaurant.json')
+
+// connect mongoose
+mongoose.connect('mongodb://localhost/restaurant-list')
+// connection status set-up
+const db = mongoose.connection
+// error situation
+db.on('error', () => {
+	console.log('Mongodb error!')
+})
+// success situation
+db.once('open', () => {
+	console.log('Mongodb connected')
+})
 
 // 取用handlebars引擎
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
