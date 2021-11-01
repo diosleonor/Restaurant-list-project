@@ -93,6 +93,15 @@ app.post('/restaurants/:restaurant_id/edit', (req, res) => {
 		.catch(error => console.log(error))
 })
 
+//設定delete路由:
+app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+	const id = req.params.restaurant_id
+	return Restaurant.findById(id)
+		.then(restaurant => restaurant.remove())
+		.then(() => res.redirect('/'))
+		.catch(error => console.log(error))
+})
+
 //渲染search page:用 Query String 打造搜尋功能
 app.get('/search',(req, res) => {
 	const keyword = req.query.keyword.toLowerCase().trim()
