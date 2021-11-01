@@ -1,0 +1,76 @@
+<!-- search bar -->
+<div class="container search-bar" >
+  <div class="search-bar-outer">
+    <div class="search-bar-inner" >
+
+      <form action="/restaurants" method="POST">
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantName" class="col-form-label">餐廳名稱</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="restaurantName" class="form-control" name="name" value='' required>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantEngName" class="col-form-label">英文名稱</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="restaurantEngName" class="form-control" name="name_en" value=''>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantCategory" class="col-form-label">餐廳類型</label>
+            </div>
+            <div class="col-auto">
+              <select id="restaurantCategory" class="form-control" name="category">
+                <option value=""></option>
+                <option value="美式">美式</option>
+                <option value="道地台式">道地台式</option>
+                <option value="日本料理">日本料理</option>
+                <option value="義式餐廳">義式餐廳</option>
+                <option value="咖啡">咖啡</option>
+                <option value="中東料理">中東料理</option>
+                <option value="酒吧">酒吧</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantLocation" class="col-form-label">餐廳地址</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="restaurantLocation" class="form-control" name="location" value='' required>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantPhone" class="col-form-label">電話號碼</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="restaurantPhone" class="form-control" name="phone" value='' required>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-auto">
+              <label for="restaurantDescription" class="col-form-label">詳細內容</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="restaurantDescription" class="form-control" name="description" value=''>
+            </div>
+          </div>
+        <div class="col-4 m-auto">
+          <button type="submit" class="btn btn-info btn-lg">新增</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

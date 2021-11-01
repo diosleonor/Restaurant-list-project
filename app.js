@@ -4,8 +4,9 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const restaurants = require('./restaurant.json')
-
+// const restaurants = require('./models/restaurant.json')
+const Restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
 // connect mongoose
 mongoose.connect('mongodb://localhost/restaurant-list')
 // connection status set-up
@@ -19,16 +20,36 @@ db.once('open', () => {
 	console.log('Mongodb connected')
 })
 
-// 取用handlebars引擎
+// 啟動handlebars引擎
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
 // 取用靜態檔案:讀取 JSON 檔案，將種子資料載入應用程式
 app.use(express.static('public'))
 
+// 為了取得POST傳輸的資料，都先將資料經過bodyParser處理
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// 路由設定
 // 渲染index page:把資料帶入 handlebars 樣板中動態呈現
 app.get('/', (req,res) => {
-	res.render('index',{restaurants:restaurants.results})
+	Restaurant.find()
+	.lean()
+	.then(restaurants => res.render('index', { restaurants }))
+	.catch(error => console.log(error))
+})
+
+// 設定New頁面路由
+app.get('/restaurants/new', (req, res) => {
+	return res.render('new')
+})
+
+// 取得New的表單資料並新增到資料庫
+app.post('/restaurants', (req, res) => {
+	const data = req.body
+	return Restaurant.create(data)
+		.then(() => res.redirect('/'))
+		.catch(error => console.log(error))
 })
 
 // 渲染show page:應用 params 打造動態路由
