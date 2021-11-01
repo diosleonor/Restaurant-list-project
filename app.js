@@ -52,10 +52,13 @@ app.post('/restaurants', (req, res) => {
 		.catch(error => console.log(error))
 })
 
-// 渲染show page:應用 params 打造動態路由
+// 設定detail頁面路由:應用 params 打造動態路由
 app.get('/restaurants/:restaurants_id', (req, res) => {
-	const restaurant = restaurants.results.find(restaurant => restaurant.id.toString() === req.params.restaurants_id)
-	res.render('show', {restaurant: restaurant})
+	const id = req.params.restaurants_id
+	return Restaurant.findById(id)
+		.lean()
+		.then(restaurant => res.render('detail', { restaurant }))
+		.catch(error => console.log(error))
 })
 
 //渲染search page:用 Query String 打造搜尋功能
