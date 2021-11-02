@@ -4,34 +4,31 @@ const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-// const restaurants = require('./models/restaurant.json')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
-// connect mongoose
+
+// mongoose setting 
 mongoose.connect('mongodb://localhost/restaurant-list')
-// connection status set-up
 const db = mongoose.connection
-// error situation
 db.on('error', () => {
 	console.log('Mongodb error!')
 })
-// success situation
 db.once('open', () => {
 	console.log('Mongodb connected')
 })
 
-// 啟動handlebars引擎
+// view engine set as handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
-// 取用靜態檔案:讀取 JSON 檔案，將種子資料載入應用程式
+// use the static document including stylesheet
 app.use(express.static('public'))
 
-// 為了取得POST傳輸的資料，都先將資料經過bodyParser處理
+// process all data by bodyParser before routing
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// 路由設定
-// 渲染index page:把資料帶入 handlebars 樣板中動態呈現
+// route setting
+// 設定index頁面路由
 app.get('/', (req,res) => {
 	Restaurant.find()
 	.lean()
@@ -77,16 +74,22 @@ app.post('/restaurants/:restaurant_id/edit', (req, res) => {
 	const editedNameEn = req.body.name_en
 	const editedCategory = req.body.category
 	const editedNameLocation = req.body.location
+	const editedGoogleMap = req.body.google_map
 	const editedNamePhone = req.body.phone
+	const editedRating = req.body.rating
 	const editedNameDescription = req.body.description
+	const editedImage = req.body.image
 	return Restaurant.findById(id)
 		.then(restaurant => {
 			restaurant.name = editedName
 			restaurant.name_en = editedNameEn
 			restaurant.category = editedCategory
 			restaurant.location = editedNameLocation
+			restaurant.google_map = editedGoogleMap
 			restaurant.phone = editedNamePhone
+			restaurant.rating = editedRating
 			restaurant.description = editedNameDescription
+			restaurant.image = editedImage
 			return restaurant.save()
 		})
 		.then(() => res.redirect(`/restaurants/${id}`))
@@ -103,14 +106,22 @@ app.post('/restaurants/:restaurant_id/delete', (req, res) => {
 })
 
 //渲染search page:用 Query String 打造搜尋功能
-app.get('/search',(req, res) => {
-	const keyword = req.query.keyword.toLowerCase().trim()
-	const restaurant = restaurants.results.filter(restaurant => {
-		return restaurant.category.toLowerCase().includes(keyword) || restaurant.name.toLowerCase().includes(keyword)
-	})
-	res.render('index', {restaurants:restaurant, keyword:keyword})
-})
+// app.get('/search',(req, res) => {
+// 	const keyword = req.query.keyword.toLowerCase().trim()
+// 	res.render('index', {restaurants, keyword})
+// })
+// 可以印出篩選的資料
+// app.get('/search',(req, res) => {
+// 	const keyword = req.query.keyword.toLowerCase().trim()
+// 	Restaurant.find({}, (err, restaurants) => {
+// 	  if (err) {return console.error(err)}
+// 	  return restaurants.filter(restaurant => {
+// 		return restaurant.category.toLowerCase().includes(keyword) || restaurant.name.toLowerCase().includes(keyword)
+// 	})
+// 	})
+// })
 
 app.listen(port, () => {
 	console.log(`App is running on http://localhost:${port}`)
 })
+
