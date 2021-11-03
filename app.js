@@ -1,6 +1,5 @@
 // 定義所需變數
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
@@ -8,16 +7,7 @@ const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const routes = require('./routes')
-// mongoose setting 
-mongoose.connect('mongodb://localhost/restaurant-list')
-const db = mongoose.connection
-db.on('error', () => {
-	console.log('Mongodb error!')
-})
-db.once('open', () => {
-	console.log('Mongodb connected')
-})
-
+require('./config/mongoose')
 // view engine set as handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
