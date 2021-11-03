@@ -6,7 +6,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
-
+const methodOverride = require('method-override')
 // mongoose setting 
 mongoose.connect('mongodb://localhost/restaurant-list')
 const db = mongoose.connection
@@ -27,6 +27,7 @@ app.use(express.static('public'))
 // process all data by bodyParser before routing
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(methodOverride('_method'))
 // route setting
 // 設定index頁面路由
 app.get('/', (req,res) => {
@@ -68,7 +69,7 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
 })
 
 // 取得edit的表單資料並修改到資料庫
-app.post('/restaurants/:restaurant_id/edit', (req, res) => {
+app.put('/restaurants/:restaurant_id', (req, res) => {
 	const id = req.params.restaurant_id
 	const editedName = req.body.name
 	const editedNameEn = req.body.name_en
@@ -97,7 +98,7 @@ app.post('/restaurants/:restaurant_id/edit', (req, res) => {
 })
 
 //設定delete路由:
-app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+app.delete('/restaurants/:restaurant_id', (req, res) => {
 	const id = req.params.restaurant_id
 	return Restaurant.findById(id)
 		.then(restaurant => restaurant.remove())
