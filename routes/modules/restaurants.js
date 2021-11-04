@@ -36,26 +36,9 @@ router.get('/:restaurant_id/edit', (req, res) => {
 // 取得edit的表單資料並修改到資料庫
 router.put('/:restaurant_id', (req, res) => {
 	const id = req.params.restaurant_id
-	const editedName = req.body.name
-	const editedNameEn = req.body.name_en
-	const editedCategory = req.body.category
-	const editedNameLocation = req.body.location
-	const editedGoogleMap = req.body.google_map
-	const editedNamePhone = req.body.phone
-	const editedRating = req.body.rating
-	const editedNameDescription = req.body.description
-	const editedImage = req.body.image
 	return Restaurant.findById(id)
 		.then(restaurant => {
-			restaurant.name = editedName
-			restaurant.name_en = editedNameEn
-			restaurant.category = editedCategory
-			restaurant.location = editedNameLocation
-			restaurant.google_map = editedGoogleMap
-			restaurant.phone = editedNamePhone
-			restaurant.rating = editedRating
-			restaurant.description = editedNameDescription
-			restaurant.image = editedImage
+			restaurant = Object.assign(restaurant, req.body)
 			return restaurant.save()
 		})
 		.then(() => res.redirect(`/restaurants/${id}`))
