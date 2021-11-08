@@ -17,29 +17,8 @@ app.use(express.static('public'))
 
 // process all data by bodyParser before routing
 app.use(bodyParser.urlencoded({ extended: true }))
-
 app.use(methodOverride('_method'))
 app.use(routes)
-
-// route setting
-
-//渲染search page:用 Query String 打造搜尋功能
-// app.get('/search',(req, res) => {
-// 	const keyword = req.query.keyword.toLowerCase().trim()
-// 	res.render('index', {restaurants, keyword})
-// })
-// 可以印出篩選的資料
-app.get('/search',(req, res) => {
-	const keyword = req.query.keyword.toLowerCase().trim()
-	Restaurant.find()
-		.lean()
-		.then(restaurants => {
-			const searchedRestaurants = restaurants.filter(restaurant => {
-				return restaurant.category.toLowerCase().includes(keyword) || restaurant.name.toLowerCase().includes(keyword)
-			})
-			res.render('index', {restaurants:searchedRestaurants, keyword})
-		})
-})
 
 app.listen(port, () => {
 	console.log(`App is running on http://localhost:${port}`)
