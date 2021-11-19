@@ -9,13 +9,23 @@
           <div class="input-group-append  mr-3">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
-          <select class="custom-select" id="sort" name='sort' onchange="this.form.submit();">
-            <option value="not-change"selected>{{#if sortInput}} {{sortInput}} {{else}}排序{{/if}}</option>
+          <select class="custom-select" id="sort" name='sort' onchange=";this.form.submit();">
+            {{#if sortInput}}
+            <option value="{{sortInput}}" selected>{{sortInput}}</option>
+            <option value="not-change" >排序</option>
+            <option value="name_asc" {{#is sortInput "A > Z"}} selected {{/is}}>A > Z</option>
+            <option value="name_desc" {{#is sortInput "Z > A"}} selected {{/is}}>Z > A</option>
+            <option value="category" {{#is sortInput "Z > A"}} selected {{/is}}>類別</option>
+            <option value="rating_desc">評分</option>
+            <option value="location">地區</option>
+            {{else}}
+            <option value="not-change">排序</option>
             <option value="name_asc">A > Z</option>
             <option value="name_desc">Z > A</option>
             <option value="category">類別</option>
             <option value="rating_desc">評分</option>
             <option value="location">地區</option>
+            {{/if}}
           </select>
         </div>
 
