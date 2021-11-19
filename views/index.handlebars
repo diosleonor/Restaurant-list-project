@@ -10,22 +10,12 @@
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
           <select class="custom-select" id="sort" name='sort' onchange=";this.form.submit();">
-            {{#if sortInput}}
-            <option value="{{sortInput}}" selected>{{sortInput}}</option>
             <option value="not-change" >排序</option>
-            <option value="name_asc" {{#is sortInput "A > Z"}} selected {{/is}}>A > Z</option>
-            <option value="name_desc" {{#is sortInput "Z > A"}} selected {{/is}}>Z > A</option>
-            <option value="category" {{#is sortInput "Z > A"}} selected {{/is}}>類別</option>
-            <option value="rating_desc">評分</option>
-            <option value="location">地區</option>
-            {{else}}
-            <option value="not-change">排序</option>
-            <option value="name_asc">A > Z</option>
-            <option value="name_desc">Z > A</option>
-            <option value="category">類別</option>
-            <option value="rating_desc">評分</option>
-            <option value="location">地區</option>
-            {{/if}}
+            <option value="name_asc" {{#is sortInput "name_asc"}} selected {{/is}}>A > Z</option>
+            <option value="name_desc" {{#is sortInput "name_desc"}} selected {{/is}}>Z > A</option>
+            <option value="category_asc" {{#is sortInput "category_asc"}} selected {{/is}}>類別</option>
+            <option value="rating_desc" {{#is sortInput "rating_desc"}} selected {{/is}}>評分</option>
+            <option value="location_asc" {{#is sortInput "ocation_asc"}} selected {{/is}}>地區</option>
           </select>
         </div>
 
