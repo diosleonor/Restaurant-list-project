@@ -45,4 +45,10 @@ router.post('/register', (req, res) => {
 		})
 })
 
+// 設定logout頁面路由
+router.get('/logout', (req, res) => {
+	req.logout()
+	res.redirect('/users/login')
+})
+
 module.exports = router
