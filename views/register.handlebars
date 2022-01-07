@@ -1,0 +1,26 @@
+<div class="row mt-5">
+	<div class="col-md-6 m-auto">
+		<div class="card card-body">
+			<h1 class="text-center mt-3">Register</h1>
+			<form action="/user/register" method="POST">
+				<label for="name" class="mb-3" style="display:block">Name
+					<input type="text" name="name" id="name" class="form-control mt-2" placeholder="Enter Name" value="">
+				</label>
+				<label for="email" class="mb-3" style="display:block">Email
+					<input type="email" name="email" id="email" class="form-control mt-2" placeholder="Enter Email" value="">
+				</label>
+				<label for="password" class="mb-3" style="display:block">Password
+					<input type="password" name="password" id="password" class="form-control mt-2" placeholder="Enter Password" value="">
+				</label>
+				<label for="confirmPassword" class="mb-3" style="display:block">Confirm Password
+					<input type="password" name="confirmPassword" id="confirmPassword" class="form-control mt-2" placeholder="Confirm Password" value="">
+				</label>
+				<button type="submit" class="btn btn-primary btn-block">Register</button>
+			</form>
+			<p class="lead mt-4">
+				Have An Account?
+				<a href="/users/login">Login</a>
+			</p>
+		</div>
+	</div>
+</div>
