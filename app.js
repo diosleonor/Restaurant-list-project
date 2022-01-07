@@ -10,6 +10,7 @@ const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 // view engine set as handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers:'multihelpers'}))
@@ -21,11 +22,14 @@ app.use(express.static('public'))
 app.use(session({
 	secret:'SecretsMakeWomanWoman',
 	resave: false,
-	saveUnintialized: true
+	saveUninitialized: true
 }))
 // process all data by bodyParser before routing
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+usePassport(app)
+
 app.use(routes)
 
 app.listen(port, () => {

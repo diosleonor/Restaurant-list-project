@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const User = require('../../models/user')
+const passport = require('passport')
 
 // 設定login頁面路由
 router.get('/login', (req, res) => {
@@ -9,13 +10,10 @@ router.get('/login', (req, res) => {
 })
 
 // 取得login的表單資料並登入
-router.post('/login', (req, res) => {
-	console.log(req.body)
-	res.redirect('/')
-	// return Restaurant.create(data)
-	// 	.then(() => res.redirect('/'))
-	// 	.catch(error => console.log(error))
-})
+router.post('/login', passport.authenticate('local', {
+	successRedirect:'/',
+	failureRedirect:'/users/login'
+}))
 
 // 設定register頁面路由
 router.get('/register', (req, res) => {
