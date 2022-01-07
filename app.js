@@ -1,5 +1,6 @@
 // 定義所需變數
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
@@ -17,6 +18,11 @@ app.set('view engine', 'handlebars')
 // use the static document including stylesheet
 app.use(express.static('public'))
 
+app.use(session({
+	secret:'SecretsMakeWomanWoman',
+	resave: false,
+	saveUnintialized: true
+}))
 // process all data by bodyParser before routing
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
