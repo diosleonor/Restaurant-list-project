@@ -3,6 +3,7 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const User = require('../../models/user')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // 設定login頁面路由
 router.get('/login', (req, res) => {
@@ -41,15 +42,15 @@ router.post('/register', (req, res) => {
 		// 已註冊
 		if(user){
 			errors.push({message:'這個 Email 已經註冊過了。'})
-			return res.render('register',{
-				name,
-				email,
-				password,
-				confirmPassword
-			})
+			return res.render('register',{name,email,password,confirmPassword})
 		}
-		// 未註冊
-		return User.create({ name, email, password})
+		// 未註冊：先把密碼加密再進資料庫建立新資料
+		return bcrypt
+			.genSalt(10)
+			.then(salt => bcrypt.hash(password,salt))
+			.then(hash => User.create({ 
+				name, email, password: hash
+			}))
 			.then(() => res.redirect('/'))
 			.catch(err => console.log(err))
 	})
