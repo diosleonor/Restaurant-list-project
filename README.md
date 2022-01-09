@@ -40,7 +40,6 @@
     <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/search.png" alt="A5-我的餐廳清單-搜尋"/></p>
     <h4>使用者可以登出保護隱私</h4>
     <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-登出.png" alt="Logout"/></p>
-
 <h3>環境建置與需求 (prerequisites)：</h3>
   Node.js<br> 
   Terminal

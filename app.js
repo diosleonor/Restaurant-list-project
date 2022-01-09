@@ -16,7 +16,6 @@ if(process.env.NODE_ENV !== 'production'){
 const port = process.env.PORT
 const routes = require('./routes')
 const usePassport = require('./config/passport')
-
 require('./config/mongoose')
 // view engine set as handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main', helpers:'multihelpers'}))
