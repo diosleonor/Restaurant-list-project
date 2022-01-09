@@ -3,7 +3,13 @@
 這是一個運用Node.js搭配Express框架及express-handlebars搭建的簡易式「我的餐廳清單」。
 
 <h3>功能描述 (features)：</h3>
-    <h4>使用者可以在首頁看到所有餐廳並可以對指定餐廳進行簡單的操作：</h4>
+    <h4>使用者需登入才能查看自己收藏的餐廳清單</h4>
+    <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-首頁.png" alt="Index"/></p>
+    <h4>使用者可以透過 Facebook Login 直接登入</h4>
+    <h4>使用者可以註冊帳號，註冊的資料包括：名字、email、密碼、確認密碼。
+    <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-註冊.png" alt="Register"/></p>
+    <h4>使用者也可以透過 Facebook Login 直接登入</h4>
+    <h4>使用者登入後可以看到所有餐廳並可以對指定餐廳進行簡單的操作：</h4>
        <ul> 
         <li>餐廳照片</li>
         <li>餐廳名稱</li>
@@ -13,7 +19,7 @@
         <li>編輯內容</li>
         <li>刪除餐廳</li>
        </ul>
-       <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-首頁.png" alt="Index"/></p>
+       <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-登入後頁面.png" alt="Login"/></p>
     <h4>使用者可以再點進去看餐廳的詳細資訊並修改：</h4>
        <ul> 
         <li>名稱</li>
@@ -31,7 +37,9 @@
        <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-新增.png" alt="Show"/></p>
     <h4>使用者可以透過搜尋餐廳名稱來找到特定的餐廳</h4>
     <h4>使用者可以透過搜尋餐廳類別來找到特定的餐廳</h4>
-    <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/search.png" alt="Search"/></p>
+    <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/search.png" alt="A5-我的餐廳清單-搜尋"/></p>
+    <h4>使用者可以登出保護隱私</h4>
+    <p><img src="https://github.com/diosleonor/Restaurant-list-project/blob/main/pics/A5-我的餐廳清單-登出.png" alt="Logout"/></p>
 
 <h3>環境建置與需求 (prerequisites)：</h3>
   Node.js<br> 
@@ -60,7 +68,7 @@
 <h3>開發工具及版本 (dev tools information)：</h3>
   Node.js v14.18.1<br> 
   Node Project Manager 8.1.0<br> 
-  Express v4.17.1<br> 
+  Express v4.17.1<br>
   express-handlebars v5.3.4<br> 
   body-parser v1.19.0<br>
   Bootstrap v4.3.1<br> 
