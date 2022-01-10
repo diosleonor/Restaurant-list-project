@@ -27,8 +27,8 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
 	const {name, email, password, confirmPassword} = req.body
 	const errors = []
-	if(!name || !email || !password || !confirmPassword){
-		errors.push({message:'所有欄位都是必填。'})
+	if(!email || !password || !confirmPassword){
+		errors.push({message:'信箱、密碼、確認密碼欄位為必填。'})
 	}
 	if(password !== confirmPassword){
 		errors.push({message:'密碼與確認密碼不相符！'})
@@ -42,7 +42,7 @@ router.post('/register', (req, res) => {
 		// 已註冊
 		if(user){
 			errors.push({message:'這個 Email 已經註冊過了。'})
-			return res.render('register',{name,email,password,confirmPassword})
+			return res.render('register',{name,email,password,confirmPassword,errors})
 		}
 		// 未註冊：先把密碼加密再進資料庫建立新資料
 		return bcrypt
